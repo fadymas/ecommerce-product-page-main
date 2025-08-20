@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  /* Typography */
+  --font-main: "Kumbh Sans", sans-serif;
+
+  /* Primary palette */
+  --color-Orange: hsl(26, 100%, 55%);
+  --color-Pale-orange: hsl(25, 100%, 94%);
+
+  /* Neutral palette */
+  --color-Very-dark-blue: hsl(220, 13%, 13%);
+  --color-Very-dark-blue-opacity: hsl(220, 13%, 13%, 0.75); /* for lightbox overlay */
+  --color-Dark-grayish-blue: hsl(219, 9%, 45%);
+  --color-Grayish-blue: hsl(220, 14%, 75%);
+  --color-Light-grayish-blue: hsl(223, 64%, 98%);
+  --color-White: hsl(0, 0%, 100%);
+  --color-Black: hsl(0, 0%, 0%);
+}
+
+/*
+  Primary navigation links
+  - Make list items full-height and smoothly interactive
+*/
+li,
+li a {
+  @apply place-content-center h-full transition-all;
+}
+
+/*
+  Anchor specifics
+  - Full height clickable area; underline indicator via inset shadow on hover
+*/
+li a {
+  @apply block h-full hover:text-Black hover:shadow-[inset_0_-4px_0_0_var(--color-Orange)];
+}
+
+/*
+  Product gallery: prev/next controls (mobile)
+  - Positioned centered vertically; circular buttons
+*/
+.product-images__main__prev,
+.product-images__main__next {
+  @apply absolute top-1/2 -translate-y-1/2 w-10 h-10 place-content-center place-items-center rounded-full bg-White lg:hidden;
+}
+
+/*
+  Product gallery: prev/next sizing within dialog (desktop)
+*/
+dialog :is(.product-images__main__prev, .product-images__main__next) {
+  @apply lg:block w-14 h-14;
+}
+
+/* Fine-tune arrow offsets inside dialog */
+dialog .product-images__main__prev {
+  @apply -left-7;
+}
+
+dialog .product-images__main__next {
+  @apply -right-7;
+}
+
+/* Fine-tune arrow offsets on page */
+.product-images__main__prev {
+  @apply left-4;
+}
+
+.product-images__main__next {
+  @apply right-4;
+}
+
+/*
+  Product thumbnails
+*/
+.product-images__thumbnail__image {
+  @apply w-22 rounded-[.625rem];
+}
+
+.product-images__thumbnails__image-wraper {
+  @apply relative;
+}
+
+/*
+  Thumbnail overlay
+  - Centered overlay used for active/hover states
+*/
+.overlay {
+  @apply absolute left-1/2 top-1/2 -translate-1/2 w-[84.8px] h-[84.8px] rounded-[8px] bg-White opacity-50 hidden transition-all duration-300;
+}
+
+/* Active thumbnail ring */
+.overlay + .product-images__thumbnail__image--active {
+  @apply border-2 border-Orange;
+}
+
+/* Show overlay on active or hover */
+.overlay:has(+ .product-images__thumbnail__image--active),
+.product-images__thumbnails__image-wraper:hover .overlay {
+  @apply block;
+}
+
+/* Expand overlay on hover when not active */
+.product-images__thumbnails__image-wraper:not(:has(.product-images__thumbnail__image--active)):hover .overlay {
+  @apply w-full h-full;
+}
+
+/*
+  Generic buttons
+*/
+button {
+  @apply cursor-pointer;
+}

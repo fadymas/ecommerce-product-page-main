@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="dist/style.min.css" />
+
+    <script src="dist/main.js" defer></script>
+
+    <title>Frontend Mentor | E-commerce product page</title>
+  </head>
+  <body class="place-items-center font-main relative min-h-screen">
+    <div
+      class="menu-overlay hidden absolute w-full h-full bg-Very-dark-blue opacity-75 z-1000"
+      role="presentation"
+    ></div>
+    <!--
+      Header contains brand, primary navigation, and user/cart controls.
+      Utility classes are Tailwind-style for layout/spacing/typography.
+    -->
+    <header
+      class="container max-w-full lg:max-w-[69.5rem] bg-White flex justify-around lg:justify-between items-center h-17 lg:h-28.25 lg:border-b-1 lg:border-Grayish-blue relative"
+    >
+      <!-- Brand + Navigation cluster -->
+      <section
+        class="header__brand-nav flex gap-4 lg:gap-14 lg:items-center justify-center items-end lg:h-full"
+      >
+        <!--
+          Mobile menu trigger. aria-expanded reflects open/closed state.
+          aria-controls references the controlled nav element below (id="nav-menu").
+        -->
+        <button
+          class="lg:hidden"
+          type="button"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+          aria-label="open-menu"
+          id="open-menu"
+        >
+          <img src="./images/icon-menu.svg" alt="" />
+        </button>
+
+        <!-- Brand logo. If this returns to home, ensure href points to the homepage. -->
+        <a class="brand-nav__logo" href="#">
+          <img src="./images/logo.svg" alt="black sneakers Logo" />
+        </a>
+
+        <!--
+          Primary navigation. Hidden on mobile (shown via menu) and visible on large screens.
+          Consider replacing # links with real routes or buttons if they trigger UI, not navigation.
+        -->
+        <nav
+          class="fixed hidden lg:relative flex-col gap-13 lg:gap-21.5 left-0 top-0 bg-white shadow-lg lg:shadow-none lg:p-0 p-8.75 pt-6.75 w-[70%] h-full lg:block lg:text-Dark-grayish-blue text-Very-dark-blue lg:place-content-center z-2000"
+          id="nav-menu"
+        >
+          <!-- Mobile close control inside nav (hidden on lg). Should toggle the same state as the open button. -->
+          <button
+            class="lg:hidden mb-13"
+            type="button"
+            id="close-menu"
+            autofocus
+          >
+            <img src="./images/icon-close.svg" alt="" />
+          </button>
+
+          <ul
+            class="flex flex-col lg:flex-row font-bold lg:font-normal lg:h-full text-lg gap-5.5 lg:gap-7.5 lg:text-[1rem]"
+          >
+            <li><a href="#">Collections</a></li>
+            <li><a href="#">Men</a></li>
+            <li><a href="#">Women</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+      </section>
+
+      <!-- Profile/cart cluster -->
+      <section
+        class="header__profile flex justify-between items-center w-17 lg:w-auto lg:gap-11.5"
+      >
+        <!-- Cart button. Consider toggling aria-expanded and aria-controls to reflect popover state. -->
+        <button
+          data-quantity="0"
+          class="after:content-[attr(data-quantity)] after:rounded-full after:w-4.75 after:h-3.25 after:font-bold after:bg-Orange after:text-White after:absolute after:text-[.625rem] after:bottom-9 after:lg:bottom-14.5 after:text-center after:px-1 after:truncate after:hidden"
+          type="button"
+          aria-expanded="false"
+          aria-controls="cart-popover"
+          aria-label="Open cart"
+        >
+          <img src="./images/icon-cart.svg" alt="" />
+        </button>
+
+        <!--
+          Cart popover (acts like a small dialog). It starts hidden.
+          role="dialog" marks a dialog; aria-hidden/aria-expanded represent visibility/state.
+          Ensure focus is moved into the dialog when opened and returned when closed; trap focus while open.{
+        -->
+        <div
+          class="cart-popover absolute w-90 h-64 sm:w-full lg:w-90 rounded-[.625rem] bg-White left-1/2 -translate-x-1/2 -bottom-66 z-10 transition-all container lg:translate-x-[45%] xl:translate-x-[75%] lg:-bottom-59.5 lg:shadow-2xl hidden"
+          role="dialog"
+          aria-hidden="true"
+          id="cart-popover"
+          aria-label="Shopping cart preview"
+        >
+          <h2 class="px-6 py-5 font-bold border-b-1 border-b-Grayish-blue">
+            Cart
+          </h2>
+          <div
+            class="empty-cart flex flex-col gap-6.25 px-6 items-stretch justify-center h-[calc(100%-4rem)]"
+          >
+            <p class="font-bold text-center">Your cart is empty</p>
+          </div>
+          <div
+            class="cart-popover__items flex-col gap-6.25 px-6 items-stretch justify-center h-[calc(100%-4rem)] hidden"
+          >
+            <!-- Empty-cart message (hidden when items exist) -->
+
+            <!-- Example cart item row. This should be rendered conditionally based on cart state. -->
+            <div class="cart-popover__items__item flex gap-4 items-center">
+              <img
+                class="w-12.5 h-12.5 rounded-[.25rem]"
+                src="./images/image-product-1-thumbnail.jpg"
+                alt="Brown and off-white sneakers — front view"
+              />
+              <div
+                class="item__info flex flex-col gap-0.75 text-[1.0625rem] mr-0.5"
+              >
+                <h2 class="text-[1rem]">Fall Limited Edition Sneakers</h2>
+                <p>
+                  $125.00 x 3 <output class="ml-1.75 font-bold">$375.00</output>
+                </p>
+              </div>
+              <button type="button" aria-label="Remove item" id="remove-item">
+                <img src="./images/icon-delete.svg" alt="Remove item" />
+              </button>
+            </div>
+
+            <!-- Checkout / Add-to-cart action; label depends on context. -->
+            <button
+              class="h-14 w-full flex justify-center gap-3 items-center rounded-[0.5rem] bg-Orange text-Very-dark-blue shadow shadow-Orange font-bold hover:bg-Pale-orange hover:shadow-Pale-orange transition-colors"
+              type="button"
+            >
+              Checkout
+            </button>
+          </div>
+        </div>
+
+        <!-- User avatar -->
+        <img
+          class="aspect-square w-6 lg:w-12 lg:hover:outline-2 outline-Orange rounded-full transition-all duration-50 ease-in-out"
+          src="./images/image-avatar.png"
+          alt="Avatar Logo"
+        />
+      </section>
+    </header>
+
+    <!--
+      Main content consists of product imagery (carousel/lightbox) and product details.
+    -->
+    <main
+      class="container max-w-full flex flex-col lg:flex-row lg:max-w-[69.5rem] lg:gap-31.25 lg:place-content-center lg:place-items-center lg:pt-22"
+    >
+      <!-- Product images: mobile carousel and desktop thumbnails/gallery -->
+      <section class="product-images lg:flex lg:flex-col gap-8">
+        <div class="product-images__main relative">
+          <!-- Previous image control for carousel -->
+          <button
+            class="product-images__main__prev"
+            type="button"
+            aria-label="Previous product image"
+          >
+            <img src="./images/icon-previous.svg" alt="" />
+          </button>
+
+          <!--
+            Main product image (likely LCP). fetchpriority="high" hints browser to prioritize.
+            Consider adding width and height attributes to reserve layout space and provide srcset/sizes for responsive loading.
+          -->
+          <img
+            class="h-75 w-full sm:h-full object-center lg:h-[27.8125rem] lg:w-[27.8125rem] lg:rounded-2xl object-cover transition-all"
+            src="./images/image-product-1.jpg"
+            alt="Sneaker Company Fall Limited Edition Sneakers"
+            aria-live="polite"
+            fetchpriority="high"
+            aria-controls="product-popover"
+            aria-expanded="false"
+          />
+
+          <!-- Next image control for carousel -->
+          <button
+            class="product-images__main__next"
+            type="button"
+            aria-label="Next product image"
+          >
+            <img src="./images/icon-next.svg" alt="" />
+          </button>
+        </div>
+
+        <!--
+          Lightbox dialog for larger product image viewing.
+          Consider adding aria-modal="true" and close on Escape. Also trap focus while open and restore focus on close.
+        -->
+        <dialog
+          class="product-images__popover bg-Very-dark-blue-opacity z-3000 place-content-center place-items-center w-full h-full top-0"
+          aria-modal="true"
+          id="product-popover"
+        >
+          <div class="product-images__main relative mb-8">
+            <!-- Close button for dialog. Prefer aria-label on the button, not the img. -->
+            <button
+              class="absolute top-2 right-2 focus-visible:outline-0 focus-visible:ring-2 focus-visible:rounded-full focus:ring-2 focus:rounded-full focus-within:ring-2 focus-within:rounded-full"
+              type="button"
+              id="close-popover"
+            >
+              <img
+                class="w-8 h-8"
+                src="./images/icon-close.svg"
+                alt=""
+                aria-label="Close dialog"
+              />
+            </button>
+
+            <!-- Previous image control inside dialog -->
+            <button
+              class="product-images__main__prev"
+              type="button"
+              aria-label="Previous product image"
+            >
+              <img src="./images/icon-previous.svg" alt="" />
+            </button>
+
+            <!-- Enlarged product image -->
+            <img
+              class="object-center w-137.5 rounded-[.9375rem] object-cover"
+              src="./images/image-product-1.jpg"
+              alt="Sneaker Company Fall Limited Edition Sneakers"
+              aria-live="assertive"
+            />
+
+            <!-- Next image control inside dialog -->
+            <button
+              class="product-images__main__next"
+              type="button"
+              aria-label="Next product image"
+            >
+              <img src="./images/icon-next.svg" alt="" />
+            </button>
+          </div>
+
+          <!-- Dialog thumbnails (desktop only) -->
+          <div
+            class="product-images__thumbnails hidden lg:flex lg:gap-8 relative"
+          >
+            <div class="product-images__thumbnails__image-wraper">
+              <div class="overlay"></div>
+              <img
+                class="product-images__thumbnail__image product-images__thumbnail__image--active"
+                src="./images/image-product-1-thumbnail.jpg"
+                alt="Brown and off-white sneakers — front view (thumbnail)"
+                loading="lazy"
+              />
+            </div>
+            <div class="product-images__thumbnails__image-wraper">
+              <div class="overlay"></div>
+              <img
+                class="product-images__thumbnail__image"
+                src="./images/image-product-2-thumbnail.jpg"
+                alt="Brown and off-white sneakers — back view on rocks (thumbnail)"
+                loading="lazy"
+              />
+            </div>
+            <div class="product-images__thumbnails__image-wraper">
+              <div class="overlay"></div>
+              <img
+                class="product-images__thumbnail__image"
+                src="./images/image-product-3-thumbnail.jpg"
+                alt="Brown and off-white sneakers — right view on rocks (thumbnail)"
+                loading="lazy"
+              />
+            </div>
+            <div class="product-images__thumbnails__image-wraper">
+              <div class="overlay"></div>
+              <img
+                class="product-images__thumbnail__image"
+                src="./images/image-product-4-thumbnail.jpg"
+                alt="Brown and off-white sneakers — left view on rocks (thumbnail)"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </dialog>
+
+        <!-- Main page thumbnails (desktop only) -->
+        <div
+          class="product-images__thumbnails hidden lg:flex lg:justify-between relative"
+        >
+          <div class="product-images__thumbnails__image-wraper">
+            <div class="overlay"></div>
+            <img
+              class="product-images__thumbnail__image product-images__thumbnail__image--active"
+              src="./images/image-product-1-thumbnail.jpg"
+              alt="Brown and off-white sneakers — front view (thumbnail)"
+              loading="lazy"
+            />
+          </div>
+          <div class="product-images__thumbnails__image-wraper">
+            <div class="overlay"></div>
+            <img
+              class="product-images__thumbnail__image"
+              src="./images/image-product-2-thumbnail.jpg"
+              alt="Brown and off-white sneakers — back view on rocks (thumbnail)"
+              loading="lazy"
+            />
+          </div>
+          <div class="product-images__thumbnails__image-wraper">
+            <div class="overlay"></div>
+            <img
+              class="product-images__thumbnail__image"
+              src="./images/image-product-3-thumbnail.jpg"
+              alt="Brown and off-white sneakers — right view on rocks (thumbnail)"
+              loading="lazy"
+            />
+          </div>
+          <div class="product-images__thumbnails__image-wraper">
+            <div class="overlay"></div>
+            <img
+              class="product-images__thumbnail__image"
+              src="./images/image-product-4-thumbnail.jpg"
+              alt="Brown and off-white sneakers — left view on rocks (thumbnail)"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Product details (title, description, pricing, actions) -->
+      <section
+        class="product-details flex flex-col gap-5 p-6 lg:p-0 lg:max-w-111.25"
+      >
+        <div class="titles flex-col flex gap-3 lg:gap-4.5">
+          <!-- Brand label -->
+          <p
+            class="font-bold text-[.75rem] tracking-[.1125rem] lg:text-[.8125rem] lg:tracking-[.1219rem] text-Dark-grayish-blue"
+          >
+            Sneaker Company
+          </p>
+
+          <!-- Main product heading (H1). Appropriate for SEO + a11y. -->
+          <h1
+            class="font-bold text-[1.75rem]/[2.0625rem] lg:text-[2.75rem]/[3rem] text-Very-dark-blue"
+          >
+            Fall Limited Edition Sneakers
+          </h1>
+
+          <!-- Product summary/description -->
+          <p
+            class="text-[.9375rem]/[1.5625rem] mt-2 lg:text-[1rem]/[1.625rem] lg:mt-6 text-Dark-grayish-blue"
+          >
+            These low-profile sneakers are your perfect casual wear companion.
+            Featuring a durable rubber outer sole, they’ll withstand everything
+            the weather can offer.
+          </p>
+        </div>
+
+        <!-- Pricing block with discount indicator -->
+        <div
+          class="prices flex mt-1.75 lg:flex-col lg:gap-4 lg:items-start items-center justify-between"
+        >
+          <div class="last-price flex gap-4 lg:gap-1.75 items-center">
+            <strong class="text-3xl">$125.00</strong>
+            <p
+              class="discount font-bold bg-Black text-White place-content-center place-items-center text-center rounded-[.375rem] w-[3.1875rem] h-[1.6875rem]"
+            >
+              50%
+            </p>
+          </div>
+          <del class="font-bold text-Grayish-blue">$250.00</del>
+        </div>
+
+        <!-- Quantity selector and Add-to-cart CTA -->
+        <div class="buttons flex flex-col lg:flex-row gap-4 mt-1 lg:mt-1">
+          <div
+            class="buttons__quantity h-14 flex-auto flex items-center justify-around bg-Light-grayish-blue rounded-[.5rem] lg:flex-[42%]"
+          >
+            <!--
+              Icon-only controls need clear labels for screen readers. aria-live on the value announces changes.
+              Ensure quantity cannot drop below zero in JS.
+            -->
+            <button
+              class=""
+              type="button"
+              aria-label="Decrease quantity"
+              id="decrease-quantity"
+            >
+              <img src="./images/icon-minus.svg" alt="" />
+            </button>
+            <span
+              class="font-bold"
+              aria-live="polite"
+              data-quantity="0"
+              id="quantity-string"
+              >0</span
+            >
+            <button
+              type="button"
+              aria-label="Increase quantity"
+              id="increase-quantity"
+            >
+              <img src="./images/icon-plus.svg" alt="" />
+            </button>
+          </div>
+
+          <!-- Primary add-to-cart action. Includes text (good for a11y) and an icon. -->
+          <button
+            class="flex-auto h-14 flex justify-center gap-3 items-center rounded-[0.5rem] bg-Orange text-Very-dark-blue shadow shadow-Orange font-bold hover:bg-Pale-orange hover:shadow-Pale-orange transition-colors lg:flex-[58%]"
+            type="button"
+            id="add-to-cart"
+            aria-label="add to cart"
+          >
+            <img
+              class="text-Very-dark-blue"
+              src="./images/icon-cart.svg"
+              alt=""
+            />Add to cart
+          </button>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
