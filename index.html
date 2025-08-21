@@ -27,7 +27,7 @@
 
     <title>Frontend Mentor | E-commerce product page</title>
   </head>
-  <body class="place-items-center font-main relative min-h-screen">
+  <body class="flex items-center flex-col font-main relative min-h-screen">
     <div
       class="menu-overlay hidden absolute w-full h-full bg-Very-dark-blue opacity-75 z-1000"
       role="presentation"
@@ -68,7 +68,7 @@
           Consider replacing # links with real routes or buttons if they trigger UI, not navigation.
         -->
         <nav
-          class="fixed hidden lg:relative flex-col gap-13 lg:gap-21.5 left-0 top-0 bg-white shadow-lg lg:shadow-none lg:p-0 p-8.75 pt-6.75 w-[70%] h-full lg:block lg:text-Dark-grayish-blue text-Very-dark-blue lg:place-content-center z-2000"
+          class="fixed hidden lg:relative flex-col gap-13 lg:gap-21.5 left-0 top-0 bg-white shadow-lg lg:shadow-none lg:p-0 p-8.75 pt-6.75 w-[70%] h-full lg:block lg:text-Dark-grayish-blue text-Very-dark-blue lg:justify-center z-2000"
           id="nav-menu"
         >
           <!-- Mobile close control inside nav (hidden on lg). Should toggle the same state as the open button. -->
@@ -82,7 +82,7 @@
           </button>
 
           <ul
-            class="flex flex-col lg:flex-row font-bold lg:font-normal lg:h-full text-lg gap-5.5 lg:gap-7.5 lg:text-[1rem]"
+            class="flex flex-col lg:justify-center lg:items-center lg:flex-row font-bold lg:font-normal lg:h-full text-lg gap-5.5 lg:gap-7.5 lg:text-[1rem]"
           >
             <li><a href="#">Collections</a></li>
             <li><a href="#">Men</a></li>
@@ -166,7 +166,7 @@
 
         <!-- User avatar -->
         <img
-          class="aspect-square w-6 lg:w-12 lg:hover:outline-2 outline-Orange rounded-full transition-all duration-50 ease-in-out"
+          class="aspect-square w-6 lg:w-12 hover:outline-2 outline-Orange rounded-full transition-all duration-50 ease-in-out"
           src="./images/image-avatar.png"
           alt="Avatar Logo"
         />
@@ -177,7 +177,7 @@
       Main content consists of product imagery (carousel/lightbox) and product details.
     -->
     <main
-      class="container max-w-full flex flex-col lg:flex-row lg:max-w-[69.5rem] lg:gap-31.25 lg:place-content-center lg:place-items-center lg:pt-22"
+      class="container max-w-full flex flex-col lg:flex-row lg:max-w-[69.5rem] lg:gap-31.25 lg:justify-center lg:items-center lg:pt-22"
     >
       <!-- Product images: mobile carousel and desktop thumbnails/gallery -->
       <section class="product-images lg:flex lg:flex-col gap-8">
@@ -220,7 +220,7 @@
           Consider adding aria-modal="true" and close on Escape. Also trap focus while open and restore focus on close.
         -->
         <dialog
-          class="product-images__popover bg-Very-dark-blue-opacity z-3000 place-content-center place-items-center w-full h-full top-0"
+          class="product-images__popover bg-Very-dark-blue-opacity z-3000 justify-center items-center w-full h-full top-0"
           aria-modal="true"
           id="product-popover"
         >
@@ -388,7 +388,7 @@
           <div class="last-price flex gap-4 lg:gap-1.75 items-center">
             <strong class="text-3xl">$125.00</strong>
             <p
-              class="discount font-bold bg-Black text-White place-content-center place-items-center text-center rounded-[.375rem] w-[3.1875rem] h-[1.6875rem]"
+              class="discount font-bold bg-Black text-White justify-center items-center text-center rounded-[.375rem] w-[3.1875rem] h-[1.6875rem]"
             >
               50%
             </p>

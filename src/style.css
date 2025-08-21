@@ -10,7 +10,8 @@
 
   /* Neutral palette */
   --color-Very-dark-blue: hsl(220, 13%, 13%);
-  --color-Very-dark-blue-opacity: hsl(220, 13%, 13%, 0.75); /* for lightbox overlay */
+  --color-Very-dark-blue-opacity: hsl(220, 13%, 13%, 0.75);
+  /* for lightbox overlay */
   --color-Dark-grayish-blue: hsl(219, 9%, 45%);
   --color-Grayish-blue: hsl(220, 14%, 75%);
   --color-Light-grayish-blue: hsl(223, 64%, 98%);
@@ -24,7 +25,7 @@
 */
 li,
 li a {
-  @apply place-content-center h-full transition-all;
+  @apply flex lg:justify-center lg:items-center h-full transition-all;
 }
 
 /*
@@ -32,7 +33,7 @@ li a {
   - Full height clickable area; underline indicator via inset shadow on hover
 */
 li a {
-  @apply block h-full hover:text-Black hover:shadow-[inset_0_-4px_0_0_var(--color-Orange)];
+  @apply flex lg:justify-center items-center h-full hover:text-Black hover:shadow-[inset_0_-4px_0_0_var(--color-Orange)];
 }
 
 /*
@@ -41,7 +42,7 @@ li a {
 */
 .product-images__main__prev,
 .product-images__main__next {
-  @apply absolute top-1/2 -translate-y-1/2 w-10 h-10 place-content-center place-items-center rounded-full bg-White lg:hidden;
+  @apply absolute top-1/2 -translate-y-1/2 w-10 h-10 flex justify-center items-center rounded-full bg-White lg:hidden;
 }
 
 /*
@@ -89,7 +90,7 @@ dialog .product-images__main__next {
 }
 
 /* Active thumbnail ring */
-.overlay + .product-images__thumbnail__image--active {
+.overlay+.product-images__thumbnail__image--active {
   @apply border-2 border-Orange;
 }
 
